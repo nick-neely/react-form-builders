@@ -2,6 +2,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import $ from "jquery";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import { FormSchemaProvider } from "./contexts/FormSchemaContext";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 
@@ -21,7 +22,9 @@ if (!rootelement.innerHTML) {
   const root = ReactDOM.createRoot(rootelement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <FormSchemaProvider>
+        <RouterProvider router={router} />
+      </FormSchemaProvider>
     </StrictMode>
   );
 }

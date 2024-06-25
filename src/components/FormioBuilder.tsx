@@ -1,12 +1,42 @@
 import { Form, FormBuilder } from "@formio/react";
 import ReactJson from "@microlink/react-json-view";
-import { useState } from "react";
+import { useFormSchema } from "../hooks/useFormSchema";
 import "../styles/FormioBuilder.css";
 
 const FormioBuilder = () => {
-  const [jsonSchema, setSchema] = useState({ components: [] });
+  const formSchemaContext = useFormSchema();
+
+  // Handle potential null value
+  if (!formSchemaContext) {
+    // Handle the error or return null/alternative component
+    console.error("FormSchemaContext is null");
+    return null; // or any other error handling
+  }
+
+  const { schema, setSchema } = formSchemaContext;
+
   const onFormChange = (schema) => {
     setSchema({ ...schema, components: [...schema.components] });
+  };
+
+  const downloadSchema = () => {
+    // Convert the JSON schema to a string
+    const schemaString = JSON.stringify(schema, null, 2);
+    // Create a Blob with the JSON string
+    const blob = new Blob([schemaString], { type: "application/json" });
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+    // Create a temporary anchor element and set its href to the Blob URL
+    const a = document.createElement("a");
+    a.href = url;
+    // Set the download filename
+    a.download = "formSchema.json";
+    // Append the anchor to the body, click it to trigger the download, and then remove it
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    // Revoke the Blob URL to free up resources
+    URL.revokeObjectURL(url);
   };
 
   const builderOptions = {
@@ -293,7 +323,7 @@ const FormioBuilder = () => {
     <>
       <div className="m-2 mt-3">
         <FormBuilder
-          form={jsonSchema}
+          form={schema}
           onChange={onFormChange}
           options={builderOptions}
         />
@@ -303,7 +333,7 @@ const FormioBuilder = () => {
           Form JSON Schema
         </div>
         <div className="text-center">
-          <ReactJson src={jsonSchema} name={null} collapsed={true} />
+          <ReactJson src={schema} name={null} collapsed={true} />
         </div>
       </div>
 
@@ -312,7 +342,21 @@ const FormioBuilder = () => {
           As Rendered Form
         </div>
         <div>
-          <Form form={jsonSchema} />
+          <Form form={schema} />
+        </div>
+      </div>
+      <div className="my-4 p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center">
+        <div className="font-bold text-lg mb-2 text-center">Form Controls</div>
+        <div className="flex gap-4">
+          <button
+            className="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={downloadSchema}
+          >
+            Download
+          </button>
+          <button className="w-64 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Save
+          </button>
         </div>
       </div>
     </>
