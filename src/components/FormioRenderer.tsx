@@ -5,9 +5,8 @@ import { useFormSchema } from "../hooks/useFormSchema";
 const FormioRender = () => {
   const formSchemaContext = useFormSchema();
 
-  // Check if formSchemaContext is not null before attempting to access schema
+  // Check if formSchemaContext is not null
   if (!formSchemaContext) {
-    // Handle the case when formSchemaContext is null, e.g., display a loading indicator or a message
     return <div>Loading form schema...</div>;
   }
 

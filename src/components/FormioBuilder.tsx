@@ -6,11 +6,10 @@ import "../styles/FormioBuilder.css";
 const FormioBuilder = () => {
   const formSchemaContext = useFormSchema();
 
-  // Handle potential null value
+  // Handle null
   if (!formSchemaContext) {
-    // Handle the error or return null/alternative component
     console.error("FormSchemaContext is null");
-    return null; // or any other error handling
+    return null;
   }
 
   const { schema, setSchema } = formSchemaContext;
@@ -20,22 +19,20 @@ const FormioBuilder = () => {
   };
 
   const downloadSchema = () => {
-    // Convert the JSON schema to a string
     const schemaString = JSON.stringify(schema, null, 2);
     // Create a Blob with the JSON string
     const blob = new Blob([schemaString], { type: "application/json" });
     // Create a URL for the Blob
     const url = URL.createObjectURL(blob);
-    // Create a temporary anchor element and set its href to the Blob URL
+    // Create a temporary a element and set its href to the Blob URL
     const a = document.createElement("a");
     a.href = url;
-    // Set the download filename
+
     a.download = "formSchema.json";
-    // Append the anchor to the body, click it to trigger the download, and then remove it
+    //Add the anchor to the body, download it, then remove it
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    // Revoke the Blob URL to free up resources
     URL.revokeObjectURL(url);
   };
 
