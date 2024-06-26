@@ -131,7 +131,22 @@ const FormioBuilder = () => {
       textarea: generateEditFormConfig(
         "textarea",
         [{ key: "rows", ignore: true }],
-        [{ key: "inputFormat", ignore: true }]
+        [
+          { key: "inputFormat", ignore: true },
+          { key: "persistent", ignore: true },
+          { key: "protected", ignore: true },
+          { key: "dbIndex", ignore: true },
+          { key: "multiple", ignore: true },
+          { key: "case", ignore: true },
+          { key: "encrypted", ignore: true },
+          { key: "truncateMultipleSpaces", ignore: true },
+          { key: "redrawOn", ignore: true },
+          { key: "clearOnHide", ignore: true },
+          { key: "customDefaultValue", ignore: true },
+          { key: "calculateValue", ignore: true },
+          { key: "calculateServer", ignore: true },
+          { key: "allowCalculateOverride", ignore: true },
+        ]
       ),
       content: generateEditFormConfig("content", [
         { key: "customClass", ignore: true },
