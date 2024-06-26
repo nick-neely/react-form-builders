@@ -9,4 +9,3 @@ export const Route = createLazyFileRoute("/joyfill")({
 function joyfillComponent() {
     return <Joyfill />;
 }
-
