@@ -1,3 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @import "formiojs/dist/formio.full.css"; */
+/* @import "./styles/tailwind.css"; */
+@import "./fonts/source-sans-pro/index.css";
+@import "./fonts/inconsolata/index.css";
+@import "./fonts/bxicons/index.css";
+/* @import "@tsed/tailwind-formio/styles/index.css"; */
+
+body {
+  font-family:
+    Source Sans Pro,
+    sans-serif;
+}
+
+/* Commons styles */
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+
+  /* Normalization for tailwindcss border utilities */
+  border-color: theme("colors.gray.200", currentColor);
+  border-style: solid;
+  border-width: 0;
+}
+
+body {
+  min-width: calc(300rem / 16);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4;
+  min-height: 100vh;
+
+  @apply text-gray-darker;
+  @apply text-base;
+  @apply font-sans;
+}
