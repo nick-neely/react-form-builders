@@ -27,7 +27,8 @@
     "npm": "^10.8.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.3",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "survey-creator-react": "^1.11.4"
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.39.10",

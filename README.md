@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+# FormBuilder Collection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the FormBuilder Collection repository! This project is a comprehensive showcase of various drag-and-drop form builders implemented in React, leveraging the power of Vite for an optimized development experience. With TypeScript as our language of choice, we ensure type safety and better developer experience across the board. Routing within the application is gracefully handled by TanStack Router, providing a seamless navigation experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Multiple Form Builders**: Explore different form builders including jQueryFormBuilder, Form.io, and FormEngine, each with unique features and capabilities.
+- **Drag-and-Drop Interface**: All form builders in this collection offer intuitive drag-and-drop interfaces, making form creation a breeze.
+- **React and TypeScript**: Built with React and TypeScript, the project offers a modern development experience with component-based architecture and type safety.
+- **Vite and TanStack Router**: Enjoy fast development cycles with Vite and efficient routing with TanStack Router.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To get started with the FormBuilder Collection, follow these simple steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. **Clone the Repository**
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+   ```bash
+   git clone https://github.com/your-username/form-builder-collection.git
+   cd form-builder-collection
+   ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the Application**
+
+   ```bash
+   npm run dev
+   ```
+
+This will start the development server and you can now access the application at `http://localhost:5173`
+
+## Builders Showcase
+
+### jQueryFormBuilder
+
+A versatile form builder that allows for quick and easy form creation with a wide range of input types and customization options.
+
+### Form.io
+
+A powerful form builder and data management platform that enables the creation of complex forms and workflows with ease.
+
+### FormEngine
+
+A React-based form builder designed for high customization and flexibility, supporting various input types and layouts.
