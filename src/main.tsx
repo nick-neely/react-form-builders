@@ -1,4 +1,6 @@
+// import { Formio, Templates } from "@formio/react";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+// import tailwind from "@tsed/tailwind-formio";
 import $ from "jquery";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
@@ -8,6 +10,10 @@ import { routeTree } from "./routeTree.gen";
 
 window.jQuery = $;
 window.$ = $;
+
+// Used for formio tailwind from @tsed/tailwind-formio
+// Formio.use(tailwind);
+// Templates.framework = "tailwind";
 
 const router = createRouter({ routeTree });
 
