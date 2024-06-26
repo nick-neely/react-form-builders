@@ -5,9 +5,6 @@ export const Route = createLazyFileRoute("/jQueryFormBuilder")({
   component: jQueryFormBuilder,
 });
 
-window.jQuery = $;
-window.$ = $;
-
 function jQueryFormBuilder() {
   const formData = [
     {
