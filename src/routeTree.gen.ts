@@ -16,12 +16,19 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const JoyfillLazyImport = createFileRoute('/joyfill')()
 const JQueryFormBuilderLazyImport = createFileRoute('/jQueryFormBuilder')()
 const FormioRendererLazyImport = createFileRoute('/formioRenderer')()
 const FormioBuilderLazyImport = createFileRoute('/formioBuilder')()
+const FormEngineLazyImport = createFileRoute('/formEngine')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const JoyfillLazyRoute = JoyfillLazyImport.update({
+  path: '/joyfill',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/joyfill.lazy').then((d) => d.Route))
 
 const JQueryFormBuilderLazyRoute = JQueryFormBuilderLazyImport.update({
   path: '/jQueryFormBuilder',
@@ -42,6 +49,11 @@ const FormioBuilderLazyRoute = FormioBuilderLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/formioBuilder.lazy').then((d) => d.Route))
 
+const FormEngineLazyRoute = FormEngineLazyImport.update({
+  path: '/formEngine',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/formEngine.lazy').then((d) => d.Route))
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -56,6 +68,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/formEngine': {
+      id: '/formEngine'
+      path: '/formEngine'
+      fullPath: '/formEngine'
+      preLoaderRoute: typeof FormEngineLazyImport
       parentRoute: typeof rootRoute
     }
     '/formioBuilder': {
@@ -79,6 +98,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JQueryFormBuilderLazyImport
       parentRoute: typeof rootRoute
     }
+    '/joyfill': {
+      id: '/joyfill'
+      path: '/joyfill'
+      fullPath: '/joyfill'
+      preLoaderRoute: typeof JoyfillLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -86,9 +112,11 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  FormEngineLazyRoute,
   FormioBuilderLazyRoute,
   FormioRendererLazyRoute,
   JQueryFormBuilderLazyRoute,
+  JoyfillLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -100,13 +128,18 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/formEngine",
         "/formioBuilder",
         "/formioRenderer",
-        "/jQueryFormBuilder"
+        "/jQueryFormBuilder",
+        "/joyfill"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/formEngine": {
+      "filePath": "formEngine.lazy.tsx"
     },
     "/formioBuilder": {
       "filePath": "formioBuilder.lazy.tsx"
@@ -116,6 +149,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/jQueryFormBuilder": {
       "filePath": "jQueryFormBuilder.lazy.tsx"
+    },
+    "/joyfill": {
+      "filePath": "joyfill.lazy.tsx"
     }
   }
 }
