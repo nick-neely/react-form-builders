@@ -21,6 +21,10 @@ function RootComponent() {
         <Link to="/formioRenderer" className="[&.active]:font-bold">
           Form.io Renderer
         </Link>
+        |
+        <Link to="/formEngine" className="[&.active]:font-bold">
+          Form Engine
+        </Link>
       </div>
       <hr />
       <Outlet />
