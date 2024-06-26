@@ -13,6 +13,8 @@
     "@formio/js": "^5.0.0-rc.48",
     "@formio/react": "^5.3.0-rc.3",
     "@microlink/react-json-view": "^1.23.0",
+    "@react-form-builder/components-rsuite": "^1.4.0",
+    "@react-form-builder/designer": "^1.4.0",
     "bootstrap": "^5.3.3",
     "formBuilder": "^3.19.7",
     "i": "^0.3.7",

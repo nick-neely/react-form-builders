@@ -16,6 +16,10 @@ export const Route = createRootRoute({
         <Link to="/formio" className="[&.active]:font-bold">
           Form.io Designer
         </Link>
+        |
+        <Link to="/formengine" className="[&.active]:font-bold">
+          Form Engine
+        </Link>
       </div>
       <hr />
       <Outlet />

@@ -18,6 +18,7 @@ import { Route as rootRoute } from './routes/__root'
 
 const JQueryFormBuilderLazyImport = createFileRoute('/jQueryFormBuilder')()
 const FormioLazyImport = createFileRoute('/formio')()
+const FormEngineLazyImport = createFileRoute('/formEngine')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
@@ -34,6 +35,11 @@ const FormioLazyRoute = FormioLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/formio.lazy').then((d) => d.Route))
 
+const FormEngineLazyRoute = FormEngineLazyImport.update({
+  path: '/formEngine',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/formEngine.lazy').then((d) => d.Route))
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -48,6 +54,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/formEngine': {
+      id: '/formEngine'
+      path: '/formEngine'
+      fullPath: '/formEngine'
+      preLoaderRoute: typeof FormEngineLazyImport
       parentRoute: typeof rootRoute
     }
     '/formio': {
@@ -71,6 +84,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  FormEngineLazyRoute,
   FormioLazyRoute,
   JQueryFormBuilderLazyRoute,
 })
@@ -84,12 +98,16 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/formEngine",
         "/formio",
         "/jQueryFormBuilder"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/formEngine": {
+      "filePath": "formEngine.lazy.tsx"
     },
     "/formio": {
       "filePath": "formio.lazy.tsx"
