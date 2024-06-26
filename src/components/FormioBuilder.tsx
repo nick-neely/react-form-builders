@@ -5,6 +5,8 @@ import "../styles/FormioBuilder.css";
 
 const FormioBuilder = () => {
   const [jsonSchema, setSchema] = useState({ components: [] });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const onFormChange = (schema) => {
     setSchema({ ...schema, components: [...schema.components] });
   };

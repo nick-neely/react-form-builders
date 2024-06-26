@@ -12,7 +12,9 @@
   "dependencies": {
     "@formio/js": "^5.0.0-rc.48",
     "@formio/react": "^5.3.0-rc.3",
+    "@joyfill/components": "^3.9.1",
     "@microlink/react-json-view": "^1.23.0",
+    "@tsed/formio-types": "^7.73.6",
     "bootstrap": "^5.3.3",
     "formBuilder": "^3.19.7",
     "i": "^0.3.7",

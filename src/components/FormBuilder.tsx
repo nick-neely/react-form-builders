@@ -1,6 +1,6 @@
 import "formBuilder";
 import "jquery-ui-sortable";
-import { useEffect, useRef } from "react";
+import {useEffect, useRef, useState} from "react";
 
 declare global {
   interface JQuery {
@@ -25,21 +25,20 @@ interface FormField {
 interface FormBuilderProps {
   formData: FormField[];
 }
-
 export const FormBuilder = ({ formData }: FormBuilderProps) => {
   const fbRef = useRef<HTMLDivElement>(null);
+  const initialized = useRef<boolean>(false);
 
   useEffect(() => {
-    if (fbRef.current) {
-      // Clear existing formBuilder instances if any
-      while (fbRef.current.firstChild) {
-        fbRef.current.removeChild(fbRef.current.firstChild);
-      }
-
+    if (fbRef.current && !initialized.current) {
       $(fbRef.current).formBuilder({ formData });
       console.log("Form Initialized");
+      initialized.current = true;
     }
-  }, [formData]);
+  }, [initialized.current, fbRef.current]);
 
-  return <div id="fb-editor" ref={fbRef} />;
+  return <>
+    <div>hello :)</div>
+    <div id="fb-editor" ref={fbRef} />;
+  </>
 };
