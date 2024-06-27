@@ -1,46 +1,48 @@
-import { Form, FormBuilder } from "@formio/react";
+import { FormBuilder } from "@formio/react";
 import ReactJson from "@microlink/react-json-view";
 import { useFormSchema } from "../hooks/useFormSchema";
 import "../styles/FormioBuilder.css";
+import { downloadSchema } from "../utils/schemaUtils";
 
 const FormioBuilder = () => {
+  // Interface for defining a field in the form schema.
   interface Field {
     key: string;
     ignore: boolean;
   }
+
+  // Retrieve the form schema context
   const formSchemaContext = useFormSchema();
 
-  // Handle null
+  // Handle null form schema context
   if (!formSchemaContext) {
     console.error("FormSchemaContext is null");
     return null;
   }
 
+  // Interface for defining the form schema.
+  interface Schema {
+    components: any[];
+  }
+
+  // Destructure the schema and setSchema functions from the form schema context
   const { schema, setSchema } = formSchemaContext;
 
-  const onFormChange = (schema) => {
+  /**
+   * Callback function for handling form changes.
+   * @param schema The updated form schema.
+   */
+  const onFormChange = (schema: Schema) => {
     setSchema({ ...schema, components: [...schema.components] });
   };
 
-  const downloadSchema = () => {
-    const schemaString = JSON.stringify(schema, null, 2);
-    // Create a Blob with the JSON string
-    const blob = new Blob([schemaString], { type: "application/json" });
-    // Create a URL for the Blob
-    const url = URL.createObjectURL(blob);
-    // Create a temporary a element and set its href to the Blob URL
-    const a = document.createElement("a");
-    a.href = url;
-
-    a.download = "formSchema.json";
-    //Add the anchor to the body, download it, then remove it
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  // Function to generate common editForm configurations
+  /**
+   * Function for generating common editForm configurations.
+   * @param componentKey The key of the component.
+   * @param additionalDisplayFields Additional display fields to include.
+   * @param additionalDataFields Additional data fields to include.
+   * @returns The generated editForm configuration.
+   */
   const generateEditFormConfig = (
     componentKey: string,
     additionalDisplayFields: Field[] = [],
@@ -72,6 +74,7 @@ const FormioBuilder = () => {
     ];
   };
 
+  // Configuration for ignored tabs
   const ignoredTabsConfig: Field[] = [
     { key: "api", ignore: true },
     { key: "validation", ignore: true },
@@ -80,6 +83,7 @@ const FormioBuilder = () => {
     { key: "layout", ignore: true },
   ];
 
+  // Configuration for common ignored fields
   const commonIgnoredFields: Field[] = [
     { key: "placeholder", ignore: true },
     { key: "tooltip", ignore: true },
@@ -103,8 +107,8 @@ const FormioBuilder = () => {
     { key: "customClass", ignore: true },
   ];
 
+  // Builder options for the form builder
   const builderOptions = {
-    // Builder sidebar configuration option passed to the form builder
     builder: {
       basic: false,
       advanced: false,
@@ -176,25 +180,14 @@ const FormioBuilder = () => {
         </div>
       </div>
 
-      <div className="my-4 p-4 border border-gray-200 rounded-lg shadow-md">
-        <div className="font-bold text-lg mb-2 text-center">
-          As Rendered Form
-        </div>
-        <div>
-          <Form form={schema} />
-        </div>
-      </div>
       <div className="my-4 p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center">
         <div className="font-bold text-lg mb-2 text-center">Form Controls</div>
         <div className="flex gap-4">
           <button
             className="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={downloadSchema}
+            onClick={() => downloadSchema(schema, "formSchema.json")}
           >
             Download
-          </button>
-          <button className="w-64 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Save
           </button>
         </div>
       </div>

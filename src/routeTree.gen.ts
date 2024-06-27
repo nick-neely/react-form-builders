@@ -16,6 +16,8 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const SurveyJSFormLibraryLazyImport = createFileRoute('/surveyJSFormLibrary')()
+const SurveyJSCreatorLazyImport = createFileRoute('/surveyJSCreator')()
 const JoyfillLazyImport = createFileRoute('/joyfill')()
 const JQueryFormBuilderLazyImport = createFileRoute('/jQueryFormBuilder')()
 const FormioRendererLazyImport = createFileRoute('/formioRenderer')()
@@ -24,6 +26,20 @@ const FormEngineLazyImport = createFileRoute('/formEngine')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const SurveyJSFormLibraryLazyRoute = SurveyJSFormLibraryLazyImport.update({
+  path: '/surveyJSFormLibrary',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/surveyJSFormLibrary.lazy').then((d) => d.Route),
+)
+
+const SurveyJSCreatorLazyRoute = SurveyJSCreatorLazyImport.update({
+  path: '/surveyJSCreator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/surveyJSCreator.lazy').then((d) => d.Route),
+)
 
 const JoyfillLazyRoute = JoyfillLazyImport.update({
   path: '/joyfill',
@@ -105,6 +121,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoyfillLazyImport
       parentRoute: typeof rootRoute
     }
+    '/surveyJSCreator': {
+      id: '/surveyJSCreator'
+      path: '/surveyJSCreator'
+      fullPath: '/surveyJSCreator'
+      preLoaderRoute: typeof SurveyJSCreatorLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/surveyJSFormLibrary': {
+      id: '/surveyJSFormLibrary'
+      path: '/surveyJSFormLibrary'
+      fullPath: '/surveyJSFormLibrary'
+      preLoaderRoute: typeof SurveyJSFormLibraryLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -117,6 +147,8 @@ export const routeTree = rootRoute.addChildren({
   FormioRendererLazyRoute,
   JQueryFormBuilderLazyRoute,
   JoyfillLazyRoute,
+  SurveyJSCreatorLazyRoute,
+  SurveyJSFormLibraryLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -132,7 +164,9 @@ export const routeTree = rootRoute.addChildren({
         "/formioBuilder",
         "/formioRenderer",
         "/jQueryFormBuilder",
-        "/joyfill"
+        "/joyfill",
+        "/surveyJSCreator",
+        "/surveyJSFormLibrary"
       ]
     },
     "/": {
@@ -152,6 +186,12 @@ export const routeTree = rootRoute.addChildren({
     },
     "/joyfill": {
       "filePath": "joyfill.lazy.tsx"
+    },
+    "/surveyJSCreator": {
+      "filePath": "surveyJSCreator.lazy.tsx"
+    },
+    "/surveyJSFormLibrary": {
+      "filePath": "surveyJSFormLibrary.lazy.tsx"
     }
   }
 }

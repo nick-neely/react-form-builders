@@ -2,12 +2,21 @@ import "formBuilder";
 import "jquery-ui-sortable";
 import { useEffect, useRef } from "react";
 
+/**
+ * Extends the global JQuery interface to include the `formBuilder` method.
+ */
 declare global {
   interface JQuery {
+    /**
+     * Initializes the form builder plugin with the specified options.
+     * @param options - The options for the form builder.
+     * @returns The jQuery object.
+     */
     formBuilder(options: FormBuilderProps): JQuery;
   }
 }
 
+// A form field
 interface FormField {
   type: string;
   subtype?: string;

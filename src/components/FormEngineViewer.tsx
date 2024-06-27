@@ -17,7 +17,9 @@ const componentsMetadata = rSuiteComponents.map(
   (definer) => definer.build().model
 );
 
-// Example form, in JSON format
+/**
+ * Represents an empty form in JSON format.
+ */
 const emptyForm = `
 {
   "version": "1",
@@ -101,6 +103,12 @@ const emptyForm = `
 
 const formName = "Example";
 
+/**
+ * Retrieves a form based on the provided name.
+ * @param name - The name of the form to retrieve. If not provided, the default form will be returned.
+ * @returns A Promise that resolves to the requested form.
+ * @throws An error if the requested form is not found.
+ */
 async function getFormFn(name?: string) {
   if (name === formName) return emptyForm;
   throw new Error(`Form '${name}' is not found.`);
@@ -116,6 +124,7 @@ const FormEngineViewer = () => {
   const ref = useRef<IFormViewer>();
 
   const setRef = useCallback((viewer: IFormViewer | null) => {
+    // If you want to work with the internal FormViewer component in an imperative style
     if (viewer) {
       ref.current = viewer;
       console.log(ref.current);

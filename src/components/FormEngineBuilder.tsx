@@ -19,20 +19,27 @@ const allowedComponents = [
 ];
 
 const FormEngineBuilder = () => {
+  // Ref to store the form viewer instance
   const ref = useRef<IFormViewer>();
 
   const setRef = useCallback((viewer: IFormViewer | null) => {
     if (viewer) {
+      // If you want to work with the internal FormViewer component in an imperative style
       ref.current = viewer;
       console.log(ref.current);
     }
   }, []);
 
-  // Used for Form Builder
+  /**
+   * Builds an array of components based on the rSuiteComponents array,
+   * and filters out components that are not included in the allowedComponents array.
+   *
+   */
   const components = rSuiteComponents
     .map((c) => c.build())
     .filter((component) => allowedComponents.includes(component.meta.type));
 
+  // Create a new BuilderView instance
   const builderView = new BuilderView(components)
     .withViewerWrapper(RsLocalizationWrapper)
     .withCssLoader(BiDi.LTR, ltrCssLoader)

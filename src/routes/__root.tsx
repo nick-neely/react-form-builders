@@ -8,7 +8,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
-      <div className="p-2 flex gap-5">
+      <div className="p-2 flex gap-6">
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>
@@ -21,9 +21,14 @@ function RootComponent() {
         <Link to="/formioRenderer" className="[&.active]:font-bold">
           Form.io Renderer
         </Link>
-        |
         <Link to="/formEngine" className="[&.active]:font-bold">
           Form Engine
+        </Link>
+        <Link to="/surveyJSCreator" className="[&.active]:font-bold">
+          SurveyJS Creator
+        </Link>
+        <Link to="/surveyJSFormLibrary" className="[&.active]:font-bold">
+          SurveyJS Form Library
         </Link>
       </div>
       <hr />

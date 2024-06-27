@@ -9,6 +9,10 @@ export const FormSchemaContext = createContext<FormSchemaContextType | null>(
   null
 );
 
+/**
+ * Provides the FormSchemaContext to the application.
+ * @param children - The child components to be wrapped by the FormSchemaProvider.
+ */
 export const FormSchemaProvider = ({ children }: { children: ReactNode }) => {
   const [schema, setSchema] = useState<{ components: any[] }>({
     components: [],
