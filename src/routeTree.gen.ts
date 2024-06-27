@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const SurveyJSFormLibraryLazyImport = createFileRoute('/surveyJSFormLibrary')()
 const SurveyJSCreatorLazyImport = createFileRoute('/surveyJSCreator')()
 const JoyfillLazyImport = createFileRoute('/joyfill')()
 const JQueryFormBuilderLazyImport = createFileRoute('/jQueryFormBuilder')()
@@ -25,6 +26,13 @@ const FormEngineLazyImport = createFileRoute('/formEngine')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const SurveyJSFormLibraryLazyRoute = SurveyJSFormLibraryLazyImport.update({
+  path: '/surveyJSFormLibrary',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/surveyJSFormLibrary.lazy').then((d) => d.Route),
+)
 
 const SurveyJSCreatorLazyRoute = SurveyJSCreatorLazyImport.update({
   path: '/surveyJSCreator',
@@ -120,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurveyJSCreatorLazyImport
       parentRoute: typeof rootRoute
     }
+    '/surveyJSFormLibrary': {
+      id: '/surveyJSFormLibrary'
+      path: '/surveyJSFormLibrary'
+      fullPath: '/surveyJSFormLibrary'
+      preLoaderRoute: typeof SurveyJSFormLibraryLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -133,6 +148,7 @@ export const routeTree = rootRoute.addChildren({
   JQueryFormBuilderLazyRoute,
   JoyfillLazyRoute,
   SurveyJSCreatorLazyRoute,
+  SurveyJSFormLibraryLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -149,7 +165,8 @@ export const routeTree = rootRoute.addChildren({
         "/formioRenderer",
         "/jQueryFormBuilder",
         "/joyfill",
-        "/surveyJSCreator"
+        "/surveyJSCreator",
+        "/surveyJSFormLibrary"
       ]
     },
     "/": {
@@ -172,6 +189,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/surveyJSCreator": {
       "filePath": "surveyJSCreator.lazy.tsx"
+    },
+    "/surveyJSFormLibrary": {
+      "filePath": "surveyJSFormLibrary.lazy.tsx"
     }
   }
 }

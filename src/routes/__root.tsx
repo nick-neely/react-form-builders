@@ -27,6 +27,9 @@ function RootComponent() {
         <Link to="/surveyJSCreator" className="[&.active]:font-bold">
           SurveyJS Creator
         </Link>
+        <Link to="/surveyJSFormLibrary" className="[&.active]:font-bold">
+          SurveyJS Form Library
+        </Link>
       </div>
       <hr />
       <Outlet />
