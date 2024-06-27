@@ -2,6 +2,7 @@ import { Form, FormBuilder } from "@formio/react";
 import ReactJson from "@microlink/react-json-view";
 import { useFormSchema } from "../hooks/useFormSchema";
 import "../styles/FormioBuilder.css";
+import { downloadSchema } from "../utils/schemaUtils";
 
 const FormioBuilder = () => {
   interface Field {
@@ -20,24 +21,6 @@ const FormioBuilder = () => {
 
   const onFormChange = (schema) => {
     setSchema({ ...schema, components: [...schema.components] });
-  };
-
-  const downloadSchema = () => {
-    const schemaString = JSON.stringify(schema, null, 2);
-    // Create a Blob with the JSON string
-    const blob = new Blob([schemaString], { type: "application/json" });
-    // Create a URL for the Blob
-    const url = URL.createObjectURL(blob);
-    // Create a temporary a element and set its href to the Blob URL
-    const a = document.createElement("a");
-    a.href = url;
-
-    a.download = "formSchema.json";
-    //Add the anchor to the body, download it, then remove it
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   // Function to generate common editForm configurations
@@ -176,25 +159,14 @@ const FormioBuilder = () => {
         </div>
       </div>
 
-      <div className="my-4 p-4 border border-gray-200 rounded-lg shadow-md">
-        <div className="font-bold text-lg mb-2 text-center">
-          As Rendered Form
-        </div>
-        <div>
-          <Form form={schema} />
-        </div>
-      </div>
       <div className="my-4 p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center">
         <div className="font-bold text-lg mb-2 text-center">Form Controls</div>
         <div className="flex gap-4">
           <button
             className="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={downloadSchema}
+            onClick={() => downloadSchema(schema, "formSchema.json")}
           >
             Download
-          </button>
-          <button className="w-64 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Save
           </button>
         </div>
       </div>
