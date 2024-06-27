@@ -15,6 +15,9 @@ function RootComponent() {
         <Link to="/jQueryFormBuilder" className="[&.active]:font-bold">
           jQuery FormBuilder
         </Link>
+        <Link to="/joyfill" className="[&.active]:font-bold">
+          Joyfill
+        </Link>
         <Link to="/formioBuilder" className="[&.active]:font-bold">
           Form.io Builder
         </Link>
