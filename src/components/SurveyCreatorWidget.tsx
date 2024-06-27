@@ -8,6 +8,7 @@ const creatorOptions = {
   showThemeTab: true,
 };
 
+// Default JSON object representing a survey
 const defaultJson = {
   pages: [
     {
@@ -30,6 +31,7 @@ const defaultJson = {
 
 const SurveyCreatorWidget = () => {
   const creator = new SurveyCreator(creatorOptions);
+  // Load the survey JSON from local storage or use the default JSON object
   creator.text =
     window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
   creator.saveSurveyFunc = (

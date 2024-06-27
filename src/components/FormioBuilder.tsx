@@ -1,29 +1,48 @@
-import { Form, FormBuilder } from "@formio/react";
+import { FormBuilder } from "@formio/react";
 import ReactJson from "@microlink/react-json-view";
 import { useFormSchema } from "../hooks/useFormSchema";
 import "../styles/FormioBuilder.css";
 import { downloadSchema } from "../utils/schemaUtils";
 
 const FormioBuilder = () => {
+  // Interface for defining a field in the form schema.
   interface Field {
     key: string;
     ignore: boolean;
   }
+
+  // Retrieve the form schema context
   const formSchemaContext = useFormSchema();
 
-  // Handle null
+  // Handle null form schema context
   if (!formSchemaContext) {
     console.error("FormSchemaContext is null");
     return null;
   }
 
+  // Interface for defining the form schema.
+  interface Schema {
+    components: any[];
+  }
+
+  // Destructure the schema and setSchema functions from the form schema context
   const { schema, setSchema } = formSchemaContext;
 
-  const onFormChange = (schema) => {
+  /**
+   * Callback function for handling form changes.
+   * @param schema The updated form schema.
+   */
+  const onFormChange = (schema: Schema) => {
     setSchema({ ...schema, components: [...schema.components] });
   };
 
-  // Function to generate common editForm configurations
+  /**
+   * Function for generating common editForm configurations.
+   * @param componentKey The key of the component.
+   * @param additionalDisplayFields Additional display fields to include.
+   * @param additionalDataFields Additional data fields to include.
+   * @returns The generated editForm configuration.
+   */
   const generateEditFormConfig = (
     componentKey: string,
     additionalDisplayFields: Field[] = [],
@@ -55,6 +74,7 @@ const FormioBuilder = () => {
     ];
   };
 
+  // Configuration for ignored tabs
   const ignoredTabsConfig: Field[] = [
     { key: "api", ignore: true },
     { key: "validation", ignore: true },
@@ -63,6 +83,7 @@ const FormioBuilder = () => {
     { key: "layout", ignore: true },
   ];
 
+  // Configuration for common ignored fields
   const commonIgnoredFields: Field[] = [
     { key: "placeholder", ignore: true },
     { key: "tooltip", ignore: true },
@@ -86,8 +107,8 @@ const FormioBuilder = () => {
     { key: "customClass", ignore: true },
   ];
 
+  // Builder options for the form builder
   const builderOptions = {
-    // Builder sidebar configuration option passed to the form builder
     builder: {
       basic: false,
       advanced: false,

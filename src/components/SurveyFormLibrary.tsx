@@ -28,7 +28,12 @@ const surveyOnlineJson = {
 
 const storageItemKey = "my-survey";
 
-// Function to save survey data to the local storage
+/**
+ * Saves the survey data to the local storage.
+ * @param {Object} survey - The survey object containing the data and current page number.
+ * @param {any} survey.data - The survey data to be saved.
+ * @param {any} survey.currentPageNo - The current page number of the survey.
+ */
 function saveSurveyData(survey: { data: any; currentPageNo: any }) {
   const data = survey.data;
   data.pageNo = survey.currentPageNo;

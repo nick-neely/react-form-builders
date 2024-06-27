@@ -1,11 +1,15 @@
 import { Form } from "@formio/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormSchema } from "../hooks/useFormSchema";
 import { downloadSchema } from "../utils/schemaUtils";
 
+type SubmissionData = { [key: string]: any };
+
 const FormioRender = () => {
   const formSchemaContext = useFormSchema();
-  const [submissionData, setSubmissionData] = useState(null);
+  const [submissionData, setSubmissionData] = useState<SubmissionData | null>(
+    null
+  );
 
   // Check if formSchemaContext is not null
   if (!formSchemaContext) {
@@ -14,8 +18,11 @@ const FormioRender = () => {
 
   const { schema } = formSchemaContext;
 
-  // Handler for form submission
-  const handleSubmit = (data) => {
+  /**
+   * Handles the form submission.
+   * @param data - The submission data.
+   */
+  const handleSubmit = (data: SubmissionData) => {
     setSubmissionData(data);
   };
 
