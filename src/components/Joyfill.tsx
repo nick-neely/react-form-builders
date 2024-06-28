@@ -59,12 +59,10 @@ const Joyfill = () => {
       >
         SAVE
       </button>
-      <div className="w-3/4 pl-5 ml-5 mb-3">
-        <JoyDoc
-          mode="edit"
-          onChange={(_changelogs: unknown, doc: unknown) => (form = doc)}
-        />
-      </div>
+      <JoyDoc
+        mode="edit"
+        onChange={(_changelogs: unknown, doc: unknown) => (form = doc)}
+      />
 
       <JoyDoc mode="fill" doc={form} />
     </div>

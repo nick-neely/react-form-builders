@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { Link, createLazyFileRoute } from "@tanstack/react-router";
 
 export const Route = createLazyFileRoute("/")({
   component: () => (
@@ -17,24 +17,54 @@ export const Route = createLazyFileRoute("/")({
         </p>
         <ul className="list-disc pl-5 mb-4">
           <li className="text-gray-600">
-            <strong>jQueryFormBuilder:</strong> OSS - Drag-and-drop, but
-            struggles with React and TypeScript integration.
+            <Link
+              to="/jQueryFormBuilder"
+              className="hover:text-blue-500"
+            >
+              <strong>jQueryFormBuilder: </strong>
+            </Link>
+            OSS - Drag-and-drop, but struggles with React and TypeScript
+            integration.
           </li>
           <li className="text-gray-600">
-            <strong>Form.io:</strong> OSS - Best OSS option with customization,
-            JSON schema, but uses Bootstrap for styling.
+            <Link
+              to="/formioBuilder"
+              className="hover:text-blue-500"
+            >
+              <strong>Form.io: </strong>
+            </Link>
+            OSS - Best OSS option with customization, JSON schema, but uses
+            Bootstrap for styling.
           </li>
           <li className="text-gray-600">
-            <strong>FormEngine:</strong> License Required - Easy implementation,
-            supports JSON schema, custom components, and more.
+            <Link
+              to="/formEngine"
+              className="hover:text-blue-500"
+            >
+              <strong>FormEngine: </strong>
+            </Link>
+            License Required - Easy implementation, supports JSON schema, custom
+            components, and more.
           </li>
           <li className="text-gray-600">
-            <strong>SurveyJS:</strong> License Required - Intuitive,
-            self-hosted, excellent documentation, supports JSON, localization.
+            <Link
+              to="/surveyJSCreator"
+              className="hover:text-blue-500"
+            >
+              <strong>SurveyJS: </strong>
+            </Link>
+            License Required - Intuitive, self-hosted, excellent documentation,
+            supports JSON, localization.
           </li>
           <li className="text-gray-600">
-            <strong>Joyfill:</strong> License Required - User-friendly but
-            requires their services for JSON schema management.
+            <Link
+              to="/joyfill"
+              className="hover:text-blue-500"
+            >
+              <strong>Joyfill: </strong>
+            </Link>
+            License Required - User-friendly but requires their services for
+            JSON schema management.
           </li>
         </ul>
         <div className="bg-gray-100 p-4 rounded-lg mb-4">
