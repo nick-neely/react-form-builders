@@ -29,7 +29,20 @@ const FormioRender = () => {
   return (
     <div className="m-4">
       <div className="p-4 border border-gray-200 rounded-lg shadow-md">
-        <Form form={schema} onSubmit={handleSubmit} />
+        <Form
+          form={schema}
+          onSubmit={handleSubmit}
+          // options={
+          //   {
+          //     disabled: {
+          //       textField: true,
+          //       radio: true,
+          //       signature1: true,
+          //       signature: false,
+          //     },
+          //   } as any
+          // }
+        />
       </div>
       {submissionData && (
         <div className="mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow-md">
